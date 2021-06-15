@@ -11,6 +11,10 @@ li.selected button {
   font-weight: bold;
 }
 
+small button {
+  font-size: smaller;
+}
+
 .board-row:after {
   clear: both;
   content: "";

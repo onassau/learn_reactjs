@@ -63,7 +63,14 @@ class Game extends React.Component {
       }],
       xIsNext: true,
       stepNumber: 0,
+      reverseHistory: false,
     };
+  }
+
+  reverseHistory(i) {
+    this.setState({
+      reverseHistory: !this.state.reverseHistory,
+    });
   }
 
   handleClick(i) {
@@ -88,6 +95,7 @@ class Game extends React.Component {
       }]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
+      reverseHistory: this.state.reverseHistory,
     });
   }
 
@@ -142,7 +150,14 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol>{this.state.reverseHistory ? moves.reverse() : moves}</ol>
+          <div>
+            <small>
+              <button onClick={(i) => this.reverseHistory(i)}>
+                reverse history
+              </button>
+            </small>
+          </div>
         </div>
       </div>
     );
