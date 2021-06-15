@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 function Square(props) {
-    return (
-      <button className="square" onClick={props.onClick}>
+  const classNames = 'square square-' + props.id;
+  return (
+    <button
+      className={classNames}
+      onClick={props.onClick}>
         {props.value}
-      </button>
-    );
+    </button>
+  );
 }
 
 class Board extends React.Component {
   renderSquare(i) {
     return (
-      <Square value={this.props.squares[i]}
+      <Square id={i}
+        value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
