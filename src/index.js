@@ -20,23 +20,25 @@ class Board extends React.Component {
   }
 
   render() {
+    const rows = Array(3).fill().map((item, i) => i);
+    const cols = Array(3).fill().map((item, i) => i);
+
     return (
       <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
+      {
+        rows.map( (row) => {
+          return (
+            <div className="board-row">
+            {
+              cols.map( (col) => {
+                const squareId = ((row) * cols.length) + col;
+                return this.renderSquare(squareId);
+              })
+            }
+            </div>
+          );
+        })
+      }
       </div>
     );
   }
