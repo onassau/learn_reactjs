@@ -48,6 +48,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        moveSquareId: 0,
       }],
       xIsNext: true,
       stepNumber: 0,
@@ -60,6 +61,7 @@ class Game extends React.Component {
     
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    const moveSquareId = i;
 
     // Do not change states when the game already has been won
     // or when the given square is already filled
@@ -71,6 +73,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        moveSquareId: moveSquareId,
       }]),
       xIsNext: !this.state.xIsNext,
       stepNumber: history.length,
@@ -92,12 +95,14 @@ class Game extends React.Component {
     const moves = history.map((step, move) => {
       const moveSelected =
         (move === this.state.stepNumber) ? 'selected' : '';
+      const moveCol = step.moveSquareId % 3;
+      const moveRow = Math.floor(step.moveSquareId / 3);
 
       const label = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + ' (row:'+ moveRow + ',col:' + moveCol + ')':
         'Go to game start';
       return (
-        <li key={move} class={moveSelected}>
+        <li key={move} className={moveSelected}>
           <button onClick={() => this.jumpTo(move)}>{label}</button>
         </li>
       );
