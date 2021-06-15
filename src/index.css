@@ -36,6 +36,10 @@ li.selected button {
   width: 34px;
 }
 
+.square.winning {
+  background: skyblue;
+}
+
 .square:focus {
   outline: none;
 }
